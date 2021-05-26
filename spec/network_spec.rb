@@ -110,6 +110,8 @@ RSpec.describe Network do
     expect(gsmn.doctors_by_hospital.values.first.last).to eq('Alex Karev')
     expect(gsmn.doctors_by_hospital.values.last.first).to eq('Miranda Bailey')
     expect(gsmn.doctors_by_hospital.values.last.last).to eq('Derek Sheperd')
+
+    # p gsmn.doctors_by_specialty
   end
 
 end

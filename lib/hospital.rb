@@ -28,7 +28,7 @@ class Hospital
     return self.doctors.map { |doc| doc.specialty }
   end
 
-  def grouped_doctors
+  def grouped_doctor_names
     return self.doctors.map { |doctor| doctor.name }
   end
 
