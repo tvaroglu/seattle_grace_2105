@@ -102,7 +102,14 @@ RSpec.describe Network do
     hospitals.each { |hospital| gsmn.add_hospital(hospital) }
 
     expect(gsmn.highest_paid_doctor.name).to eq('Miranda Bailey')
-    puts gsmn.doctors_by_hospital
+
+    expect(gsmn.doctors_by_hospital.class).to eq(Hash)
+    expect(gsmn.doctors_by_hospital.keys.length).to eq(2)
+    expect(gsmn.doctors_by_hospital.values.first.length).to eq(2)
+    expect(gsmn.doctors_by_hospital.values.first.first).to eq('Meredith Grey')
+    expect(gsmn.doctors_by_hospital.values.first.last).to eq('Alex Karev')
+    expect(gsmn.doctors_by_hospital.values.last.first).to eq('Miranda Bailey')
+    expect(gsmn.doctors_by_hospital.values.last.last).to eq('Derek Sheperd')
   end
 
 end

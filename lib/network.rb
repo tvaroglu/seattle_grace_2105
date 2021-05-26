@@ -19,13 +19,12 @@ class Network
   end
 
   def doctors_by_hospital
-    grouped = self.hospitals.group_by do |hospital|
-      hospital
-    end
-    grouped.each do |hospital, attributes|
-      attributes = grouped[attributes]
+    grouped = Hash.new
+    self.hospitals.map do |hospital|
+      grouped[hospital] = hospital.grouped_doctors
     end
     return grouped
   end
+
 
 end
