@@ -111,7 +111,15 @@ RSpec.describe Network do
     expect(gsmn.doctors_by_hospital.values.last.first).to eq('Miranda Bailey')
     expect(gsmn.doctors_by_hospital.values.last.last).to eq('Derek Sheperd')
 
-    # p gsmn.doctors_by_specialty
+    expect(gsmn.doctors_by_specialty.class).to eq(Hash)
+    expect(gsmn.doctors_by_specialty.keys.length).to eq(3)
+    expect(gsmn.doctors_by_specialty.values.first.length).to eq(2)
+    expect(gsmn.doctors_by_specialty.values.first.first).to eq('Meredith Grey')
+    expect(gsmn.doctors_by_specialty.values.first.last).to eq('Miranda Bailey')
+    expect(gsmn.doctors_by_specialty.values.last.length).to eq(1)
+    expect(gsmn.doctors_by_specialty.values.last.first).to eq('Derek Sheperd')
+
+    expect(gsmn.average_doctors_salary).to eq(116250.00)
   end
 
 end

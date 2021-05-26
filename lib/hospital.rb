@@ -32,4 +32,11 @@ class Hospital
     return self.doctors.map { |doctor| doctor.name }
   end
 
+  def total_doctor_salaries
+    total_salary = self.doctors.reduce(0) do |total, doctor|
+      total + doctor.salary
+    end
+    return [total_salary, self.doctors.length]
+  end
+
 end

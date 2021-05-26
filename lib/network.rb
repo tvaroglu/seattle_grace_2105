@@ -31,10 +31,26 @@ class Network
     self.hospitals.each do |hospital|
       hospital.doctors.each do |doctor|
         grouped[doctor.specialty] = Array.new
-        grouped[doctor.specialty] << doctor.name
       end
     end
-    return grouped
+    grouped.each do |specialty, doctors_array|
+      self.hospitals.each do |hospital|
+        hospital.doctors.each do |doctor|
+          doctors_array << doctor.name if doctor.specialty == specialty
+        end
+      end
+    end
+  end
+
+  def average_doctors_salary
+    total_metrics = self.hospitals.map { |hospital| hospital.total_doctor_salaries }
+    total_salary = 0
+    total_doctors = 0
+    total_metrics.each do |metrics|
+      total_salary += metrics[0]
+      total_doctors += metrics[1]
+    end
+    return (total_salary.to_f / total_doctors).round(2)
   end
 
 
