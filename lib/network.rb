@@ -50,7 +50,8 @@ class Network
       total_salary += metrics[0]
       total_doctors += metrics[1]
     end
-    return (total_salary.to_f / total_doctors).round(2)
+    result = (total_salary.to_f / total_doctors).round
+    return result.to_s.split('.')[0].to_i
   end
 
 

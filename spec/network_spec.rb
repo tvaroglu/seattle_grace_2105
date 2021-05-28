@@ -122,7 +122,7 @@ RSpec.describe Network do
     expect(gsmn.doctors_by_specialty.values.last.length).to eq(1)
     expect(gsmn.doctors_by_specialty.values.last.first).to eq('Derek Sheperd')
 
-    expect(gsmn.average_doctors_salary).to eq(116250.00)
+    expect(gsmn.average_doctors_salary).to eq(116250)
   end
 
 end
