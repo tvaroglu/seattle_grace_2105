@@ -72,7 +72,7 @@ RSpec.describe Hospital do
     hospital = Hospital.new(@name, @chief_of_surgery, @doctors)
 
     expect(hospital.total_salary).to eq(190000)
-    expect(hospital.lowest_paid_doctor).to eq('Alex Karev')
+    expect(hospital.lowest_paid_doctor.name).to eq('Alex Karev')
 
     expect(hospital.specialties.class).to eq(Array)
     expect(hospital.specialties.length).to eq(2)

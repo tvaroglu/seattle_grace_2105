@@ -12,31 +12,23 @@ class Hospital
   end
 
   def total_salary
-    return self.doctors.sum { |doc| doc.salary }
+    @doctors.sum { |doctor| doctor.salary }
   end
 
   def lowest_paid_doctor
-    result = self.doctors.min_by { |doc| doc.salary }
-    return result.name unless result == nil
+    @doctors.min_by { |doctor| doctor.salary }
   end
 
-  def highest_paid_doctor_object
-    return self.doctors.max_by { |doc| doc.salary }
+  def highest_paid_doctor
+    @doctors.max_by { |doctor| doctor.salary }
   end
 
   def specialties
-    return self.doctors.map { |doc| doc.specialty }
+    @doctors.map { |doctor| doctor.specialty }
   end
 
   def grouped_doctor_names
-    return self.doctors.map { |doctor| doctor.name }
-  end
-
-  def total_doctor_salaries
-    total_salary = self.doctors.reduce(0) do |total, doctor|
-      total + doctor.salary
-    end
-    return [total_salary, self.doctors.length]
+    @doctors.map { |doctor| doctor.name }
   end
 
 end

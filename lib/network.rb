@@ -7,34 +7,30 @@ class Network
   end
 
   def add_hospital(hospital)
-    self.hospitals << hospital if hospital.class == Hospital
+    @hospitals << hospital if hospital.class == Hospital
   end
 
   def highest_paid_doctor
-    comparison_arr = []
-    self.hospitals.each do |hospital|
-      comparison_arr << hospital.highest_paid_doctor_object
-    end
-    return comparison_arr.max_by { |doctor| doctor.salary }
+    @hospitals.map do |hospital|
+      hospital.highest_paid_doctor
+    end.max_by { |doctor| doctor.salary }
   end
 
   def doctors_by_hospital
-    grouped = Hash.new
-    self.hospitals.each do |hospital|
-      grouped[hospital] = hospital.grouped_doctor_names
+    @hospitals.each_with_object({}) { |hospital, hash| hash[hospital] = hospital.grouped_doctor_names }
+  end
+
+  def specialties_in_network
+    grouping = Hash.new
+    @hospitals.each do |hospital|
+      hospital.doctors.each { |doctor| grouping[doctor.specialty] = Array.new }
     end
-    return grouped
+    grouping
   end
 
   def doctors_by_specialty
-    grouped = Hash.new
-    self.hospitals.each do |hospital|
-      hospital.doctors.each do |doctor|
-        grouped[doctor.specialty] = Array.new
-      end
-    end
-    grouped.each do |specialty, doctors_array|
-      self.hospitals.each do |hospital|
+    specialties_in_network.each do |specialty, doctors_array|
+      @hospitals.each do |hospital|
         hospital.doctors.each do |doctor|
           doctors_array << doctor.name if doctor.specialty == specialty
         end
@@ -43,15 +39,13 @@ class Network
   end
 
   def average_doctors_salary
-    total_metrics = self.hospitals.map { |hospital| hospital.total_doctor_salaries }
     total_salary = 0
     total_doctors = 0
-    total_metrics.each do |metrics|
-      total_salary += metrics[0]
-      total_doctors += metrics[1]
+    @hospitals.each do |hospital|
+      total_salary += hospital.total_salary
+      total_doctors += hospital.doctors.length
     end
-    result = (total_salary.to_f / total_doctors).round
-    return result.to_s.split('.')[0].to_i
+    (total_salary / total_doctors.to_f).round
   end
 
 
